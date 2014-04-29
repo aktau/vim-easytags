@@ -51,5 +51,5 @@ def easytags_gensyncmd(tagsfiles, filetype, tagkinds, syntaxgroup, prefix, suffi
     return ' | '.join(commands)
 
 def _easytags_makecmd(syntaxgroup, prefix, suffix, patterns, ignoresyntax):
-    template = r'syntax match %s /%s\%%(%s\)%s/ containedin=ALLBUT,%s'
-    return template % (syntaxgroup, prefix, r'\|'.join(patterns), suffix, ignoresyntax)
+    template = r'syntax keyword %s %s containedin=ALLBUT,%s'
+    return template % (syntaxgroup, r' '.join(patterns), ignoresyntax)
