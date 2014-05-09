@@ -462,9 +462,8 @@ function! xolox#easytags#highlight() " {{{2
           if matches != []
             " Convert matched tags to :syntax command and execute it.
             let matches = xolox#misc#list#unique(map(matches, 'xolox#misc#escape#pattern(get(v:val, "name"))'))
-            let pattern = tagkind.pattern_prefix . '\%(' . join(matches, '\|') . '\)' . tagkind.pattern_suffix
-            let template = 'syntax match %s /%s/ containedin=ALLBUT,%s'
-            let command = printf(template, hlgroup_tagged, escape(pattern, '/'), xolox#easytags#syntax_groups_to_ignore())
+            let template = 'syntax keyword %s %s containedin=ALLBUT,%s'
+            let command = printf(template, hlgroup_tagged, join(matches, ' '), xolox#easytags#syntax_groups_to_ignore())
             call xolox#misc#msg#debug("easytags.vim %s: Executing command '%s'.", g:xolox#easytags#version, command)
             try
               execute command
